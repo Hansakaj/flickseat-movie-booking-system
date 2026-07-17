@@ -146,17 +146,26 @@ md:border border-gray-300/20 overflow-hidden transition-[width] duration-300 ${i
           )}
         </div>
 
-      <div className='relative flex shrink-0 items-center gap-5 md:gap-6'>
-        <div className='relative hidden md:block'>
-          {isSearchOpen ? (
-            <div className='flex w-[min(360px,32vw)] items-center gap-2 rounded-full border border-white/15 bg-black/55 px-4 py-2 shadow-xl shadow-black/30 backdrop-blur'>
-              <Search className='h-4 w-4 shrink-0 text-gray-300' />
+      <div className='relative flex items-center gap-8'>
+        <button
+          type='button'
+          onClick={() => setIsSearchOpen((value) => !value)}
+          className='max-md:hidden'
+          aria-label='Search movies'
+        >
+          <Search className='h-6 w-6 cursor-pointer' />
+        </button>
+
+        {isSearchOpen && (
+          <div className='absolute right-24 top-12 w-80 rounded-xl border border-white/10 bg-black/90 p-3 shadow-2xl shadow-black/60 backdrop-blur'>
+            <div className='flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2'>
+              <Search className='h-4 w-4 text-gray-300' />
               <input
                 autoFocus
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
                 placeholder='Search movies'
-                className='min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-gray-400'
+                className='w-full bg-transparent text-sm text-white outline-none placeholder:text-gray-400'
               />
               <button
                 type='button'
@@ -165,57 +174,43 @@ md:border border-gray-300/20 overflow-hidden transition-[width] duration-300 ${i
                   setIsSearchOpen(false)
                 }}
                 aria-label='Close search'
-                className='shrink-0'
               >
                 <X className='h-4 w-4 text-gray-400 transition hover:text-white' />
               </button>
             </div>
-          ) : (
-            <button
-              type='button'
-              onClick={() => setIsSearchOpen(true)}
-              className='flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/5 transition hover:border-red-300/30 hover:bg-white/10'
-              aria-label='Search movies'
-            >
-              <Search className='h-5 w-5 cursor-pointer' />
-            </button>
-          )}
 
-          {isSearchOpen && (
-            <div className='absolute right-0 top-12 w-[min(360px,86vw)] rounded-xl border border-white/10 bg-black/90 p-2 shadow-2xl shadow-black/60 backdrop-blur'>
-              <div className='max-h-80 overflow-y-auto'>
-                {searchTerm ? (
-                  searchResults.length > 0 ? (
-                    searchResults.map((movie) => (
-                      <button
-                        key={movie.id ?? movie._id}
-                        type='button'
-                        onClick={() => openMovie(movie)}
-                        className='flex w-full items-center gap-3 rounded-lg p-2 text-left transition hover:bg-white/10'
-                      >
-                        <img
-                          src={movie.poster_path || movie.backdrop_path}
-                          alt={movie.title}
-                          className='h-14 w-10 shrink-0 rounded object-cover'
-                        />
-                        <div className='min-w-0'>
-                          <p className='truncate text-sm font-medium text-white'>{movie.title}</p>
-                          <p className='truncate text-xs text-gray-400'>
-                            {(movie.genres || []).slice(0, 2).map((genre) => genre.name).join(' | ') || 'Movie'}
-                          </p>
-                        </div>
-                      </button>
-                    ))
-                  ) : (
-                    <p className='px-3 py-4 text-center text-sm text-gray-400'>No movies found</p>
-                  )
+            <div className='mt-3 max-h-80 overflow-y-auto'>
+              {searchTerm ? (
+                searchResults.length > 0 ? (
+                  searchResults.map((movie) => (
+                    <button
+                      key={movie.id ?? movie._id}
+                      type='button'
+                      onClick={() => openMovie(movie)}
+                      className='flex w-full items-center gap-3 rounded-lg p-2 text-left transition hover:bg-white/10'
+                    >
+                      <img
+                        src={movie.poster_path || movie.backdrop_path}
+                        alt={movie.title}
+                        className='h-14 w-10 rounded object-cover'
+                      />
+                      <div className='min-w-0'>
+                        <p className='truncate text-sm font-medium text-white'>{movie.title}</p>
+                        <p className='truncate text-xs text-gray-400'>
+                          {(movie.genres || []).slice(0, 2).map((genre) => genre.name).join(' | ') || 'Movie'}
+                        </p>
+                      </div>
+                    </button>
+                  ))
                 ) : (
-                  <p className='px-3 py-4 text-center text-sm text-gray-400'>Type a movie name</p>
-                )}
-              </div>
+                  <p className='px-3 py-4 text-center text-sm text-gray-400'>No movies found</p>
+                )
+              ) : (
+                <p className='px-3 py-4 text-center text-sm text-gray-400'>Type a movie name</p>
+              )}
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
      
 

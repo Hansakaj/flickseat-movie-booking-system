@@ -101,54 +101,40 @@ const LoginModal = ({ onClose }) => {
   return (
     <div className='login-modal-backdrop'>
       <div className='login-modal'>
-        <button
-          type='button'
-          onClick={onClose}
-          className='login-modal-close'
-          aria-label='Close login modal'
-        >
-          X
+        <button type='button' onClick={onClose} className='login-modal-close'>
+          x
         </button>
 
         <div className='login-modal-brand'>
-          <div className='login-brand-mark'>
-            <span>F</span>
-            <strong>Flickseat</strong>
-          </div>
-
-          <div className='login-brand-copy'>
-            <p className='login-modal-eyebrow'>Movie Tickets</p>
-            <h2>Welcome back</h2>
-            <p>
-              Login to book seats, manage your tickets, and complete secure online payments.
-            </p>
-            <div className='login-modal-points'>
-              <span>Fast booking</span>
-              <span>Secure payment</span>
-              <span>Saved tickets</span>
-            </div>
+          <p className='login-modal-eyebrow'>Movie Tickets</p>
+          <h2>Welcome back</h2>
+          <p>
+            Login to book seats, manage your tickets, and complete secure online payments.
+          </p>
+          <div className='login-modal-points'>
+            <span>Fast booking</span>
+            <span>Secure payment</span>
+            <span>Saved tickets</span>
           </div>
         </div>
 
         <div className='login-modal-form'>
-          <div className='login-form-frame'>
-            <SignIn
-              routing='hash'
-              appearance={{
-                elements: {
-                  rootBox: 'login-clerk-root',
-                  cardBox: 'login-clerk-card-box',
-                  card: 'login-clerk-card',
-                  headerTitle: 'login-clerk-title',
-                  headerSubtitle: 'login-clerk-subtitle',
-                  socialButtonsBlockButton: 'login-clerk-social',
-                  formFieldInput: 'login-clerk-input',
-                  formButtonPrimary: 'login-clerk-primary',
-                  footerActionLink: 'login-clerk-link',
-                },
-              }}
-            />
-          </div>
+          <SignIn
+            routing='hash'
+            appearance={{
+              elements: {
+                rootBox: 'login-clerk-root',
+                cardBox: 'login-clerk-card-box',
+                card: 'login-clerk-card',
+                headerTitle: 'login-clerk-title',
+                headerSubtitle: 'login-clerk-subtitle',
+                socialButtonsBlockButton: 'login-clerk-social',
+                formFieldInput: 'login-clerk-input',
+                formButtonPrimary: 'login-clerk-primary',
+                footerActionLink: 'login-clerk-link',
+              },
+            }}
+          />
         </div>
       </div>
     </div>
